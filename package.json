@@ -2,13 +2,13 @@
   "name": "ts-webpack-env",
   "version": "1.0.0",
   "description": "A web app dev env using typescript",
-  "main": "index.html",
+  "private": true,
   "scripts": {
     "test": "echo \"No test!\"",
-    "start": "webpack",
-    "dev": "npx webpack-dev-server --mode development --content-base ./"
+    "build": "webpack",
+    "serve": "npx webpack-dev-server --mode development --content-base ./"
   },
-  "author": "",
+  "author": "deping chen",
   "license": "MIT",
   "devDependencies": {
     "ts-loader": "^6.2.0",
