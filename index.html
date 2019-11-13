@@ -7,7 +7,9 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>TypeScript-Dev-Web-App</title>
-    <script src="./fabric.min.js"></script>
+    <script src="./lodash.core.js"></script>
+    <script src="./math.js"></script>
+    <script src="./fabric.js"></script>
     <script src="./fabric.ext.js"></script>
     <style>
         canvas {
@@ -17,50 +19,154 @@
 </head>
 
 <body oncontextmenu="return false">
+    <!-- fabric.Canvas -->
     <canvas id='c' width="800" height="600"></canvas>
+
     <script>
-        var canvas = new fabric.Canvas2('c');
+        var canvas = new fabric.Canvas2('c', { showCoord: true, rightHand: true/*show right hand sytem coordinates*/ });
+
         // create a rectangle object
-        var rect = new fabric.Rect({
-            left: 100,
+        var rect = rightHand.makeRect({
+            left: 10,
             top: 50,
             fill: '#D81B60',
-            width: 50,
-            height: 50,
+            width: 40,
+            height: 40,
             strokeWidth: 2,
             stroke: "#880E4F",
-            rx: 10,
-            ry: 10,
-            angle: 45,
-            scaleX: 3,
-            scaleY: 3,
-            hasControls: true
+            rx: 5,
+            ry: 5,
+            // angle: 45,
+            // scaleX: 3,
+            // scaleY: 3,
+            strokeUniform: true,
         });
-
         canvas.add(rect);
 
-        var circle1 = new fabric.Circle({
-            radius: 65,
-            fill: '#039BE5',
-            left: 0,
+        var line = rightHand.makeLine([10, 50, 50, 10], {
             stroke: 'red',
-            strokeWidth: 3
+            strokeUniform: true,
+            // angle: 45,
+            // scaleX: 3,
+            // scaleY: 3,
+        });
+        canvas.add(line);
+
+        var circle = rightHand.makeCircle({
+            radius: 20,
+            fill: '#039BE5',
+            left: 10,
+            top: 50,
+            stroke: 'red',
+            strokeWidth: 2,
+            strokeUniform: true,
+            // angle: 45,
+            // scaleX: 3,
+            // scaleY: 3,
+        });
+        canvas.add(circle);
+
+        var text = rightHand.makeText(
+            '白日依山尽，\n黄河入海流，\n欲穷千里目，\n更上一层楼。',
+            {
+                left: 60,
+                top: 50,
+                fill: '#039BE5',
+                fontSize: 12,
+                // angle: 45,
+            });
+        canvas.add(text);
+
+        var polyline = rightHand.makePolyline([
+            { x: 0, y: 0 },
+            { x: 100, y: 0 },
+            { x: 100, y: 70 },
+            { x: 0, y: 70 },
+        ], {
+            stroke: 'red',
+            strokeUniform: true,
+            // angle: 45,
+            // scaleX: 3,
+            // scaleY: 3,
+        });
+        canvas.add(polyline);
+
+        var dimAln1 = rightHand.makeDimAln({
+            extPt1: { x: 30, y: -50 },
+            extPt2: { x: 50, y: -30 },
+            dimColor: 'red',
+            extColor: 'blue',
+            textColor: 'green',
+            dimDist: 10,
+            extOff: 1,
+            extExt: 3,
+            textGap: 1,
+            // prefix: 'H',
+            suffix: 'm',
+            fixed: 1, // 计算出的text的小数位数
+            // text: "50 cm",
+            textHeight: 2.5
         });
 
-        var circle2 = new fabric.Circle({
-            radius: 65,
-            fill: '#4FC3F7',
-            left: 110,
-            opacity: 0.7,
-            stroke: 'blue',
-            strokeWidth: 3,
-            strokeUniform: true
+        canvas.add(dimAln1);
+
+        var dimAln1 = rightHand.makeDimAln({
+            extPt1: { x: 30, y: -50 },
+            extPt2: { x: 50, y: -30 },
+            dimColor: 'red',
+            extColor: 'blue',
+            textColor: 'green',
+            dimDist: -10,
+            extOff: 1,
+            extExt: 3,
+            textGap: 1,
+            // prefix: 'H',
+            suffix: 'm',
+            fixed: 1, // 计算出的text的小数位数
+            // text: "50 cm",
+            textHeight: 2.5
         });
 
-        canvas.add(circle1);
-        canvas.add(circle2);
+        canvas.add(dimAln1);
+
+        // var dim = new fabric.DimAln({
+        //     extPt1: { x: 30, y: 30 },
+        //     extPt2: { x: 40, y: 20 },
+        //     dimDist: 10,
+        //     extOff: 1,
+        //     extExt: 3,
+        //     textGap: 1,
+        //     text: "50 cm",
+        //     textHeight: 2.5
+        // });
+
+        // canvas.add(dim);
+
+        // var dim = new fabric.DimAln({
+        //     extPt1: { x: 30, y: 30 },
+        //     extPt2: { x: 20, y: 20 },
+        //     dimDist: 10,
+        //     extOff: 1,
+        //     extExt: 3,
+        //     text: "50 cm",
+        //     textHeight: 2.5
+        // });
+
+        // canvas.add(dim);
+
+        // var dim = new fabric.DimAln({
+        //     extPt1: { x: 30, y: 30 },
+        //     extPt2: { x: 20, y: 40 },
+        //     dimDist: 10,
+        //     extOff: 1,
+        //     extExt: 3,
+        //     text: "50 cm",
+        //     textHeight: 2.5
+        // });
+
+        // canvas.add(dim);
+
     </script>
-    <script src="./dist/bundle.js"></script>
 </body>
 
 </html>
