@@ -16,5 +16,14 @@
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.2"
+  },
+  "dependencies": {
+    "@types/d3": "^5.7.2",
+    "@types/lodash": "^4.14.146",
+    "@types/mathjs": "^6.0.2",
+    "d3": "^5.12.0",
+    "lodash": "^4.17.15",
+    "mathjs": "^6.2.3",
+    "tslint": "^5.20.1"
   }
 }

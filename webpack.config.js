@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/index.ts',
+    entry: './src/geometry2d.ts',
     devtool: 'source-map',
     module: {
         rules: [
@@ -16,7 +16,7 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js']
     },
     output: {
-        filename: 'bundle.js',
+        filename: 'geometry2d.js',
         path: path.resolve(__dirname, 'dist'),
         publicPath: "/dist/",
     }

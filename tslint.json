@@ -1,9 +1,7 @@
 {
   "defaultSeverity": "error",
   "extends": "tslint:recommended",
-  "rulesDirectory": [
-    "codelyzer"
-  ],
+  "rulesDirectory": [],
   "rules": {
     "array-type": false,
     "arrow-parens": false,
