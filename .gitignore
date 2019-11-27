@@ -46,3 +46,10 @@ testem.log
 .DS_Store
 Thumbs.db
 .vscode/launch.json
+Polygon.js
+Point2D.js
+math.min.js
+lodash.js
+Intersection.js
+2D.js
+.vscode/settings.json

@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@types/d3": "^5.7.2",
+    "@types/fabric": "^3.4.1",
     "@types/lodash": "^4.14.146",
     "@types/mathjs": "^6.0.2",
     "d3": "^5.12.0",
