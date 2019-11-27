@@ -58,10 +58,10 @@
 
         var circle = rightHand.makeCircle({
             radius: 20,
-            fill: '#039BE5',
+            fill: 'green',
             left: 10,
             top: 50,
-            stroke: 'red',
+            stroke: 'blue',
             strokeWidth: 2,
             strokeUniform: true,
             // angle: 45,
@@ -95,45 +95,45 @@
         });
         canvas.add(polyline);
 
-        // var dimAln1 = rightHand.makeDimAln({
-        //     extPt1: { x: 30, y: -50 },
-        //     extPt2: { x: 50, y: -30 },
-        //     dimColor: 'red',
-        //     extColor: 'blue',
-        //     textColor: 'green',
-        //     dimDist: 10,
-        //     extOff: 1,
-        //     extExt: 3,
-        //     textGap: 1,
-        //     // prefix: 'H',
-        //     suffix: 'm',
-        //     fixed: 1, // 计算出的text的小数位数
-        //     // text: "50 cm",
-        //     textHeight: 2.5
-        // });
+        var dimAln1 = rightHand.makeDimAln({
+            extPt1: { x: 30, y: -50 },
+            extPt2: { x: 50, y: -30 },
+            dimColor: 'red',
+            extColor: 'blue',
+            textColor: 'green',
+            dimDist: 10,
+            extOff: 1,
+            extExt: 3,
+            textGap: 1,
+            // prefix: 'H',
+            suffix: 'm',
+            fixed: 1, // 计算出的text的小数位数
+            // text: "50 cm",
+            textHeight: 2.5
+        });
 
-        // canvas.add(dimAln1);
+        canvas.add(dimAln1);
 
-        // var dimAln1 = rightHand.makeDimAln({
-        //     extPt1: { x: 30, y: -50 },
-        //     extPt2: { x: 50, y: -30 },
-        //     dimColor: 'red',
-        //     extColor: 'blue',
-        //     textColor: 'green',
-        //     dimDist: -10,
-        //     extOff: 1,
-        //     extExt: 3,
-        //     textGap: 1,
-        //     // prefix: 'H',
-        //     suffix: 'm',
-        //     fixed: 1, // 计算出的text的小数位数
-        //     // text: "50 cm",
-        //     textHeight: 2.5
-        // });
+        var dimAln1 = rightHand.makeDimAln({
+            extPt1: { x: 30, y: -50 },
+            extPt2: { x: 50, y: -30 },
+            dimColor: 'red',
+            extColor: 'blue',
+            textColor: 'green',
+            dimDist: -10,
+            extOff: 1,
+            extExt: 3,
+            textGap: 1,
+            // prefix: 'H',
+            suffix: 'm',
+            fixed: 1, // 计算出的text的小数位数
+            // text: "50 cm",
+            textHeight: 2.5
+        });
 
-        // canvas.add(dimAln1);
+        canvas.add(dimAln1);
 
-        canvas.clear();
+        // canvas.clear();
 
         const l = exports.line2fabric(new exports.Line(0, 0, 100, 100), {
             stroke: 'red',
@@ -168,49 +168,6 @@
             strokeUniform: true,
         });
         canvas.add(r);
-
-        var line = rightHand.makeLine([0, 0, 50, 0], {
-            stroke: 'red',
-            strokeUniform: true,
-        });
-        canvas.add(line);
-
-        // var dim = new fabric.DimAln({
-        //     extPt1: { x: 30, y: 30 },
-        //     extPt2: { x: 40, y: 20 },
-        //     dimDist: 10,
-        //     extOff: 1,
-        //     extExt: 3,
-        //     textGap: 1,
-        //     text: "50 cm",
-        //     textHeight: 2.5
-        // });
-
-        // canvas.add(dim);
-
-        // var dim = new fabric.DimAln({
-        //     extPt1: { x: 30, y: 30 },
-        //     extPt2: { x: 20, y: 20 },
-        //     dimDist: 10,
-        //     extOff: 1,
-        //     extExt: 3,
-        //     text: "50 cm",
-        //     textHeight: 2.5
-        // });
-
-        // canvas.add(dim);
-
-        // var dim = new fabric.DimAln({
-        //     extPt1: { x: 30, y: 30 },
-        //     extPt2: { x: 20, y: 40 },
-        //     dimDist: 10,
-        //     extOff: 1,
-        //     extExt: 3,
-        //     text: "50 cm",
-        //     textHeight: 2.5
-        // });
-
-        // canvas.add(dim);
 
         canvas.zoomToFit();
 

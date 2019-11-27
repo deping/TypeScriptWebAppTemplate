@@ -1840,6 +1840,8 @@ export function line2fabric(l: Line, options: any) {
 
 export function circle2fabric(c: Circle, options: any) {
     options = options || {};
+    options.originX = "center";
+    options.originY = "center";
     options.angle = 0;
     options.top = c.center.x;
     options.left = c.center.y;
@@ -1852,6 +1854,8 @@ export function circle2fabric(c: Circle, options: any) {
 
 export function arc2fabric(a: Arc, options: any) {
     options = options || {};
+    options.originX = "center";
+    options.originY = "center";
     options.angle = 0;
     options.top = a.center.x;
     options.left = a.center.y;

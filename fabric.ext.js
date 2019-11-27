@@ -309,7 +309,7 @@ if (typeof exports !== 'undefined') {
       const textHeight = this.get('textHeight');
       const textLine = offsetLine(this.dimLine.p1, this.dimLine.p2, -gap);
       const textLine2 = offsetLine(this.dimLine.p1, this.dimLine.p2, -(gap + textHeight));
-      this.textPos = midPoint({ p1: midPoint(textLine), p2: midPoint(textLine2) });
+      this.textPos = midPoint(midPoint(textLine.p1, textLine.p2), midPoint(textLine2.p1, textLine2.p2));
 
       var points = [];
       points.push(this.dimLine.p1, this.dimLine.p2, this.extLine1.p1, this.extLine1.p2, this.extLine2.p1, this.extLine2.p2, textLine2.p1, textLine2.p2);
@@ -459,24 +459,40 @@ if (typeof exports !== 'undefined') {
   };
 
   rightHand.makeCircle = function (options) {
-    options.originX = "center";
-    options.originY = "center";
     options.angle = options.angle || 0;
     if (_.isFinite(options.angle)) {
       options.angle = -options.angle;
     }
+    options.top = options.top || 0;
     if (_.isFinite(options.top)) {
       options.top = -options.top;
     }
-    if (_.isFinite(options.startAngle)) {
-      options.startAngle = -options.startAngle;
+    if (options.originY === "bottom") {
+      options.top -= options.radius;
+    } else if (options.originY !== "center") { // top
+      options.top += options.radius;
     }
-    if (_.isFinite(options.endAngle)) {
-      options.endAngle = -options.endAngle;
+    options.left = options.left || 0;
+    if (options.originX === "right") {
+      options.left -= options.radius;
+    } else if (options.originX !== "center") { // left
+      options.left += options.radius;
     }
-    var tmp = options.startAngle;
-    options.startAngle = options.endAngle;
-    options.endAngle = tmp;
+    options.originX = "center";
+    options.originY = "center";
+    options.startAngle = options.startAngle || 0;
+    options.endAngle = options.endAngle || 2 * Math.PI;
+    if (options.startAngle !== 0 && !math.equal(options.endAngle, 2 * Math.PI)) {
+      if (_.isFinite(options.startAngle)) {
+        options.startAngle = -options.startAngle;
+      }
+      if (_.isFinite(options.endAngle)) {
+        options.endAngle = -options.endAngle;
+      }
+      var tmp = options.startAngle;
+      options.startAngle = options.endAngle;
+      options.endAngle = tmp;
+    }
     var ret = new fabric.Circle2(options);
     return ret;
   };
@@ -490,6 +506,19 @@ if (typeof exports !== 'undefined') {
     if (_.isFinite(options.top)) {
       options.top = -options.top;
     }
+    options.left = options.left || 0;
+    if (options.originX === "right") {
+      options.left -= options.width / 2.0;
+    } else if (options.originX !== "center") { // left
+      options.left += options.width / 2.0;
+    }
+    if (options.originY === "bottom") {
+      options.top -= options.height / 2.0;
+    } else if (options.originY !== "center") { // top
+      options.top += options.height / 2.0;
+    }
+    options.originX = "center";
+    options.originY = "center";
     var ret = new fabric.Rect2(options);
     return ret;
   };
@@ -675,10 +704,10 @@ function lengthenEnd(line, length) {
   line.p2.y += dy * co;
 }
 
-function midPoint(line) {
+function midPoint(p1, p2) {
   return {
-    x: (line.p1.x + line.p2.x) / 2.0,
-    y: (line.p1.y + line.p2.y) / 2.0
+    x: (p1.x + p2.x) / 2.0,
+    y: (p1.y + p2.y) / 2.0
   };
 }
 
