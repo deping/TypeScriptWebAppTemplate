@@ -11,6 +11,9 @@
     <script src="./math.js"></script>
     <script src="./fabric.js"></script>
     <script src="./fabric.ext.js"></script>
+    <script>
+        var exports = {};
+    </script>
     <script src="./dist/geometry2d.js"></script>
     <style>
         canvas {
@@ -92,43 +95,85 @@
         });
         canvas.add(polyline);
 
-        var dimAln1 = rightHand.makeDimAln({
-            extPt1: { x: 30, y: -50 },
-            extPt2: { x: 50, y: -30 },
-            dimColor: 'red',
-            extColor: 'blue',
-            textColor: 'green',
-            dimDist: 10,
-            extOff: 1,
-            extExt: 3,
-            textGap: 1,
-            // prefix: 'H',
-            suffix: 'm',
-            fixed: 1, // 计算出的text的小数位数
-            // text: "50 cm",
-            textHeight: 2.5
+        // var dimAln1 = rightHand.makeDimAln({
+        //     extPt1: { x: 30, y: -50 },
+        //     extPt2: { x: 50, y: -30 },
+        //     dimColor: 'red',
+        //     extColor: 'blue',
+        //     textColor: 'green',
+        //     dimDist: 10,
+        //     extOff: 1,
+        //     extExt: 3,
+        //     textGap: 1,
+        //     // prefix: 'H',
+        //     suffix: 'm',
+        //     fixed: 1, // 计算出的text的小数位数
+        //     // text: "50 cm",
+        //     textHeight: 2.5
+        // });
+
+        // canvas.add(dimAln1);
+
+        // var dimAln1 = rightHand.makeDimAln({
+        //     extPt1: { x: 30, y: -50 },
+        //     extPt2: { x: 50, y: -30 },
+        //     dimColor: 'red',
+        //     extColor: 'blue',
+        //     textColor: 'green',
+        //     dimDist: -10,
+        //     extOff: 1,
+        //     extExt: 3,
+        //     textGap: 1,
+        //     // prefix: 'H',
+        //     suffix: 'm',
+        //     fixed: 1, // 计算出的text的小数位数
+        //     // text: "50 cm",
+        //     textHeight: 2.5
+        // });
+
+        // canvas.add(dimAln1);
+
+        canvas.clear();
+
+        const l = exports.line2fabric(new exports.Line(0, 0, 100, 100), {
+            stroke: 'red',
+            strokeUniform: true,
         });
+        canvas.add(l);
 
-        canvas.add(dimAln1);
-
-        var dimAln1 = rightHand.makeDimAln({
-            extPt1: { x: 30, y: -50 },
-            extPt2: { x: 50, y: -30 },
-            dimColor: 'red',
-            extColor: 'blue',
-            textColor: 'green',
-            dimDist: -10,
-            extOff: 1,
-            extExt: 3,
-            textGap: 1,
-            // prefix: 'H',
-            suffix: 'm',
-            fixed: 1, // 计算出的text的小数位数
-            // text: "50 cm",
-            textHeight: 2.5
+        const c = exports.arc2fabric(new exports.Arc({ x: 50, y: 50 }, 50, Math.PI / 6, Math.PI / 2), {
+            stroke: 'red',
+            strokeUniform: true,
         });
+        canvas.add(c);
 
-        canvas.add(dimAln1);
+        const c2 = exports.arc2fabric(new exports.Arc({ x: 50, y: 50 }, 50, -Math.PI / 6, -Math.PI / 2), {
+            stroke: 'red',
+            strokeUniform: true,
+        });
+        canvas.add(c2);
+
+        // const pl = exports.polyline2fabric({ points: [{ x: 0, y: 0 }, { x: 20, y: 0 }, { x: 27, y: 0.09 }, { x: 31.2, y: 0.26 }, { x: 80, y: 30 }] }, {
+        //     stroke: 'red',
+        //     strokeUniform: true,
+        // });
+        // canvas.add(pl);
+
+        var cps = [];
+        cps.push(exports.CriticalPoint.line({ x: 0, y: 0 }));
+        cps.push(exports.CriticalPoint.ease({ x: 20, y: 0 }, -1, 30));
+        cps.push(exports.CriticalPoint.arc({ x: 80, y: 30 }, 80));
+        const r = exports.route2fabric(new exports.Route(0, cps), {
+            stroke: 'red',
+            strokeUniform: true,
+        });
+        canvas.add(r);
+
+        var line = rightHand.makeLine([0, 0, 50, 0], {
+            stroke: 'red',
+            strokeUniform: true,
+        });
+        canvas.add(line);
 
         // var dim = new fabric.DimAln({
         //     extPt1: { x: 30, y: 30 },
