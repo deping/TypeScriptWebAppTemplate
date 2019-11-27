@@ -443,6 +443,8 @@ if (typeof exports !== 'undefined') {
   var rightHand = global.rightHand = {};
 
   rightHand.makeLine = function (points, options) {
+    options.originX = "center";
+    options.originY = "center";
     options.angle = options.angle || 0;
     if (_.isFinite(options.angle)) {
       options.angle = -options.angle;
@@ -457,6 +459,8 @@ if (typeof exports !== 'undefined') {
   };
 
   rightHand.makeCircle = function (options) {
+    options.originX = "center";
+    options.originY = "center";
     options.angle = options.angle || 0;
     if (_.isFinite(options.angle)) {
       options.angle = -options.angle;
@@ -470,6 +474,9 @@ if (typeof exports !== 'undefined') {
     if (_.isFinite(options.endAngle)) {
       options.endAngle = -options.endAngle;
     }
+    var tmp = options.startAngle;
+    options.startAngle = options.endAngle;
+    options.endAngle = tmp;
     var ret = new fabric.Circle2(options);
     return ret;
   };
@@ -488,6 +495,8 @@ if (typeof exports !== 'undefined') {
   };
 
   rightHand.makePolyline = function (points, options) {
+    options.originX = "center";
+    options.originY = "center";
     options.angle = options.angle || 0;
     if (_.isFinite(options.angle)) {
       options.angle = -options.angle;
@@ -502,6 +511,8 @@ if (typeof exports !== 'undefined') {
   };
 
   rightHand.makePolygon = function (points, options) {
+    options.originX = "center";
+    options.originY = "center";
     options.angle = options.angle || 0;
     if (_.isFinite(options.angle)) {
       options.angle = -options.angle;

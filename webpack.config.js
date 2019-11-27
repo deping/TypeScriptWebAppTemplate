@@ -3,6 +3,15 @@ const path = require('path');
 module.exports = {
     entry: './src/geometry2d.ts',
     devtool: 'source-map',
+    externals: {
+        mathjs: 'math',
+        lodash: {
+            commonjs: "lodash",
+            amd: "lodash",
+            root: "_" // 指向全局变量
+        },
+        fabric: { root: "fabric" }
+    },
     module: {
         rules: [
             {
