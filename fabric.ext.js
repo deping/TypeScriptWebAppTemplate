@@ -595,6 +595,8 @@ if (typeof exports !== 'undefined') {
     return ret;
   };
 
+  rightHandle.loadTypeExtensions = []; // array of function(e)=>fabric.Object
+
   rightHand.loadObjects = function (ar) {
     var result = [];
     if (_.isArray(ar)) {
@@ -647,8 +649,22 @@ if (typeof exports !== 'undefined') {
             if (d !== undefined)
               result.push(d);
             break;
-            break;
           default:
+            var loadExtCount = rightHandle.loadTypeExtensions.length;
+            for (let j = 0; j < loadExtCount; ++j) {
+              var loadFunc = rightHandle.loadTypeExtensions[j];
+              if (_.isFunction(loadFunc)) {
+                var d = loadFunc(e);
+                if (d !== undefined) {
+                  if (_.isArray(d)) {
+                    d.map(function (v) { result.push(v); });
+                  } else {
+                    result.push(d);
+                  }
+                  break;
+                }
+              }
+            }
             break;
         }
       }

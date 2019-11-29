@@ -1898,3 +1898,45 @@ export function route2fabric(r: Route, options: any) {
     g.addWithUpdate();
     return g;
 }
+
+// extend to rightHand.loadObjects
+function loadCriticalPoints(criticalPoints: any[]) {
+    var cps = [] as CriticalPoint[];
+    for (let cp of criticalPoints) {
+        switch (cp.type) {
+            case 'line':
+                cps.push(CriticalPoint.line(cp.point));
+                break;
+            case 'arc':
+                let tmp = CriticalPoint.arc(cp.point, cp.radius);
+                if (tmp !== undefined)
+                    cps.push(tmp);
+                break;
+            case 'ease':
+                tmp = CriticalPoint.ease(cp.point, cp.radius, cp.a);
+                if (tmp !== undefined)
+                    cps.push(tmp);
+                break;
+            default:
+                break;
+        }
+    }
+    return cps;
+}
+
+function loadRoute(e: any) {
+    if (e.type === 'route') {
+        let cps = loadCriticalPoints(e.criticalPoints);
+        var d = new Route(e.startAngle, cps, e.startMile, e.offset);
+        e.startAngle = undefined;
+        e.criticalPoints = undefined;
+        e.startMile = undefined;
+        e.offset = undefined;
+        return route2fabric(d, e);
+    }
+    return undefined;
+}
+
+if (rightHand.loadTypeExtensions.indexOf(loadRoute) === -1) {
+    rightHand.loadTypeExtensions.push(loadRoute);
+}
