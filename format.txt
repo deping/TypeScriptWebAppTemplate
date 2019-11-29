@@ -50,5 +50,28 @@
         extColor?: 'red' | '#F00',
         dimColor?: ...,
         textColor?: ...,
+    },
+    {
+        type:'route',
+        startAngle: 0,
+        criticalPoints: [
+            {
+                type:'line',
+                point: {x:0, y:0},
+            },
+            {
+                type:'arc',
+                point: {x:0, y:0},
+                radius: 30,
+            },
+            {
+                type:'ease',
+                point: {x:0, y:0},
+                radius: 30,
+                a: 50,
+            },
+        ],
+        startMile?: 0,
+        offset?: 0,
     }
 ]
