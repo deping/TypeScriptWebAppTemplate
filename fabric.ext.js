@@ -595,6 +595,67 @@ if (typeof exports !== 'undefined') {
     return ret;
   };
 
+  rightHand.loadObjects = function (ar) {
+    var result = [];
+    if (_.isArray(ar)) {
+      return result;
+    }
+    for (let i = 0; i < ar.length; ++i) {
+      const e = ar[i];
+      if (_.isObject(e)) {
+        switch (e.type) {
+          case 'line':
+            const p1p2 = e.coords;
+            e.coords = undefined;
+            var l = rightHand.makeLine(p1p2, e);
+            if (l !== undefined)
+              result.push(l);
+            break;
+          case 'circle':
+            var c = rightHand.makeCircle(e);
+            if (c !== undefined)
+              result.push(c);
+            break;
+          case 'polyline':
+            let points = e.points;
+            e.points = undefined;
+            var pl = rightHand.makePolyline(points, e);
+            if (pl !== undefined)
+              result.push(pl);
+            break;
+          case 'polygon':
+            points = e.points;
+            e.points = undefined;
+            var pg = rightHand.makePolygon(points, e);
+            if (pg !== undefined)
+              result.push(pg);
+            break;
+          case 'rect':
+            var t = rightHand.makeRect(e);
+            if (t !== undefined)
+              result.push(t);
+            break;
+          case 'text':
+            const text = e.text;
+            e.text = undefined;
+            var t = rightHand.makePolygon(text, e);
+            if (t !== undefined)
+              result.push(t);
+            break;
+          case 'dimaln':
+            var d = rightHand.makeDimAln(e);
+            if (d !== undefined)
+              result.push(d);
+            break;
+            break;
+          default:
+            break;
+        }
+      }
+    }
+    return result;
+  };
+
 })(typeof exports !== 'undefined' ? exports : this);
 
 function offsetLine(p1, p2, distance) {

@@ -1,0 +1,54 @@
+[
+    {
+        type: 'line',
+        coords: [x1,y1,x2,y2],
+        ...
+    },
+    {
+        type: 'circle',
+        center: {x:0, y:0},
+        radius: 50,
+        startAngle?: 0,
+        endAngle?: 2 * PI,
+        ...
+    },
+    {
+        type: 'polyline'|'polygon',
+        points: [{x:0, y:0}, ...],
+        ...
+    },
+    {
+        type: 'rect',
+        left: 0,
+        top: 0,
+        width: 10,
+        height: 10,
+        ...
+    },
+    {
+        type: 'text',
+        text: 'hello',
+        left: 0,
+        top: 0,
+        originX?: 'center',
+        originY?: 'center',
+        ...
+    },
+    {
+        type: 'dimaln',
+        extPt1: {x:0, y:0},
+        extPt2: {x:10, y:10},
+        dimDist: -10 | 10,
+        extExt?: 1,
+        extOff?: 1,
+        textGap?: 1,
+        fixed?: 2, // 小数位数
+        prefix?: '$',
+        suffix?: 'cm',
+        text?: '自定义文字',
+        textPos?: {x:30, y: 30},
+        extColor?: 'red' | '#F00',
+        dimColor?: ...,
+        textColor?: ...,
+    }
+]
