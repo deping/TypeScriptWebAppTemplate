@@ -614,6 +614,12 @@ if (typeof exports !== 'undefined') {
               result.push(l);
             break;
           case 'circle':
+            if (_.isObject(e.center)) {
+              e.originX = "center";
+              e.originY = "center";
+              e.left = e.center.x;
+              e.top = e.center.y;
+            }
             var c = rightHand.makeCircle(e);
             if (c !== undefined)
               result.push(c);
