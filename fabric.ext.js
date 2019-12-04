@@ -595,11 +595,11 @@ if (typeof exports !== 'undefined') {
     return ret;
   };
 
-  rightHandle.loadTypeExtensions = []; // array of function(e)=>fabric.Object
+  rightHand.loadTypeExtensions = []; // array of function(e)=>fabric.Object
 
   rightHand.loadObjects = function (ar) {
     var result = [];
-    if (_.isArray(ar)) {
+    if (!_.isArray(ar)) {
       return result;
     }
     for (let i = 0; i < ar.length; ++i) {
@@ -646,7 +646,7 @@ if (typeof exports !== 'undefined') {
           case 'text':
             const text = e.text;
             e.text = undefined;
-            var t = rightHand.makePolygon(text, e);
+            var t = rightHand.makeText(text, e);
             if (t !== undefined)
               result.push(t);
             break;
@@ -656,9 +656,9 @@ if (typeof exports !== 'undefined') {
               result.push(d);
             break;
           default:
-            var loadExtCount = rightHandle.loadTypeExtensions.length;
+            var loadExtCount = rightHand.loadTypeExtensions.length;
             for (let j = 0; j < loadExtCount; ++j) {
-              var loadFunc = rightHandle.loadTypeExtensions[j];
+              var loadFunc = rightHand.loadTypeExtensions[j];
               if (_.isFunction(loadFunc)) {
                 var d = loadFunc(e);
                 if (d !== undefined) {
