@@ -645,7 +645,7 @@ if (typeof exports !== 'undefined') {
             break;
           case 'text':
             const text = e.text;
-            e.text = undefined;
+            // e.text = undefined;
             var t = rightHand.makeText(text, e);
             if (t !== undefined)
               result.push(t);
