@@ -480,8 +480,8 @@ if (typeof exports !== 'undefined') {
     }
     options.originX = "center";
     options.originY = "center";
-    options.startAngle = options.startAngle || 0;
-    options.endAngle = options.endAngle || 2 * Math.PI;
+    options.startAngle = _.isFinite(options.startAngle) ? options.startAngle : 0;
+    options.endAngle = _.isFinite(options.endAngle) ? options.endAngle : 2 * Math.PI;
     if (options.startAngle !== 0 && !math.equal(options.endAngle, 2 * Math.PI)) {
       if (_.isFinite(options.startAngle)) {
         options.startAngle = -options.startAngle;
