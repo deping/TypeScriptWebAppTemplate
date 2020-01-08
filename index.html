@@ -115,6 +115,7 @@
         canvas.add(dimAln1);
 
         var dimAln1 = rightHand.makeDimAln({
+            oblique: Math.PI / 4.0,
             extPt1: { x: 30, y: -50 },
             extPt2: { x: 50, y: -30 },
             dimColor: 'red',
@@ -135,39 +136,42 @@
 
         // canvas.clear();
 
-        const l = exports.line2fabric(new exports.Line(0, 0, 100, 100), {
-            stroke: 'red',
-            strokeUniform: true,
-        });
-        canvas.add(l);
-
-        const c = exports.arc2fabric(new exports.Arc({ x: 50, y: 50 }, 50, Math.PI / 6, Math.PI / 2), {
-            stroke: 'red',
-            strokeUniform: true,
-        });
-        canvas.add(c);
-
-        const c2 = exports.arc2fabric(new exports.Arc({ x: 50, y: 50 }, 50, -Math.PI / 6, -Math.PI / 2), {
-            stroke: 'red',
-            strokeUniform: true,
-        });
-        canvas.add(c2);
-
-        // const pl = exports.polyline2fabric({ points: [{ x: 0, y: 0 }, { x: 20, y: 0 }, { x: 27, y: 0.09 }, { x: 31.2, y: 0.26 }, { x: 80, y: 30 }] }, {
+        // const l = exports.line2fabric(new exports.Line(0, 0, 100, 100), {
         //     stroke: 'red',
         //     strokeUniform: true,
         // });
-        // canvas.add(pl);
+        // canvas.add(l);
 
-        var cps = [];
-        cps.push(exports.CriticalPoint.line({ x: 0, y: 0 }));
-        cps.push(exports.CriticalPoint.ease({ x: 20, y: 0 }, -1, 30));
-        cps.push(exports.CriticalPoint.arc({ x: 80, y: 30 }, 80));
-        const r = exports.route2fabric(new exports.Route(0, cps), {
-            stroke: 'red',
-            strokeUniform: true,
-        });
-        canvas.add(r);
+        // const c = exports.arc2fabric(new exports.Arc({ x: 50, y: 50 }, 50, Math.PI / 6, Math.PI / 2), {
+        //     stroke: 'red',
+        //     strokeUniform: true,
+        // });
+        // canvas.add(c);
+
+        // const c2 = exports.arc2fabric(new exports.Arc({ x: 50, y: 50 }, 50, -Math.PI / 6, -Math.PI / 2), {
+        //     stroke: 'red',
+        //     strokeUniform: true,
+        // });
+        // canvas.add(c2);
+
+        // // const pl = exports.polyline2fabric({ points: [{ x: 0, y: 0 }, { x: 20, y: 0 }, { x: 27, y: 0.09 }, { x: 31.2, y: 0.26 }, { x: 80, y: 30 }] }, {
+        // //     stroke: 'red',
+        // //     strokeUniform: true,
+        // // });
+        // // canvas.add(pl);
+
+        // var cps = [];
+        // cps.push(exports.CriticalPoint.line({ x: 0, y: 0 }));
+        // cps.push(exports.CriticalPoint.ease({ x: 20, y: 0 }, -1, 30));
+        // cps.push(exports.CriticalPoint.arc({ x: 80, y: 30 }, 80));
+        // const r = exports.route2fabric(new exports.Route(0, cps), {
+        //     stroke: 'red',
+        //     strokeUniform: true,
+        // });
+        // canvas.add(r);
+
+        // var a = rightHand.loadObjects([{ type: 'circle', strokeUniform: 'true', center: { x: -719.926533, y: -2306.672298 }, radius: 25.000000, startAngle: -1.570796, endAngle: 0.000000, stroke: 'black', },])
+        // canvas.add(...a);
 
         canvas.zoomToFit();
 

@@ -261,7 +261,14 @@ if (typeof exports !== 'undefined') {
         this.set('text', options.text);
       }
       this.set('textPos', options.textPos || { x: 100, y: 100 });
-      this.set('textAngle', options.textAngle | 0);
+      this.set('textAngle', options.textAngle || 0);
+      if (_.isFinite(options.oblique)) {
+        if (options.oblique > Math.PI / 4)
+          options.oblique = Math.PI / 4;
+        else if (options.oblique < -Math.PI / 4)
+          options.oblique = -Math.PI / 4;
+      }
+      this.set('oblique', options.oblique || 0);
       this.build();
     },
 
@@ -309,8 +316,32 @@ if (typeof exports !== 'undefined') {
       const textHeight = this.get('textHeight');
       const textLine = offsetLine(this.dimLine.p1, this.dimLine.p2, -gap);
       const textLine2 = offsetLine(this.dimLine.p1, this.dimLine.p2, -(gap + textHeight));
+
+      // adjust points by oblique
+      const oblique = this.get('oblique');
+      if (oblique != 0) {
+        const tanoblique = Math.tan(oblique);
+        const uv = unitVector(this.dimLine.p1, this.dimLine.p2);
+        let tmp = -offset * tanoblique;
+        offsetPoint(this.extLine1.p1, tmp * uv.x, tmp * uv.y);
+        offsetPoint(this.extLine2.p1, tmp * uv.x, tmp * uv.y);
+        tmp = (-dimDist - extend) * tanoblique;
+        offsetPoint(this.extLine1.p2, tmp * uv.x, tmp * uv.y);
+        offsetPoint(this.extLine2.p2, tmp * uv.x, tmp * uv.y);
+        tmp = -dimDist * tanoblique;
+        offsetPoint(this.dimLine.p1, tmp * uv.x, tmp * uv.y);
+        offsetPoint(this.dimLine.p2, tmp * uv.x, tmp * uv.y);
+        tmp = (-dimDist - gap) * tanoblique;
+        offsetPoint(textLine.p1, tmp * uv.x, tmp * uv.y);
+        offsetPoint(textLine.p2, tmp * uv.x, tmp * uv.y);
+        tmp = (-dimDist - (gap + textHeight)) * tanoblique;
+        offsetPoint(textLine2.p1, tmp * uv.x, tmp * uv.y);
+        offsetPoint(textLine2.p2, tmp * uv.x, tmp * uv.y);
+      }
+
       this.textPos = midPoint(midPoint(textLine.p1, textLine.p2), midPoint(textLine2.p1, textLine2.p2));
 
+      // adjust points by bbox, make points relative to center of bbox
       var points = [];
       points.push(this.dimLine.p1, this.dimLine.p2, this.extLine1.p1, this.extLine1.p2, this.extLine2.p1, this.extLine2.p2, textLine2.p1, textLine2.p2);
       var bbox = getBBox(points);
@@ -573,6 +604,10 @@ if (typeof exports !== 'undefined') {
     if (_.isFinite(options.angle)) {
       options.angle = -options.angle;
     }
+    options.oblique = options.oblique || 0;
+    if (_.isFinite(options.oblique)) {
+      options.oblique = -options.oblique;
+    }
     options.top = options.top || 0;
     if (_.isFinite(options.top)) {
       options.top = -options.top;
@@ -679,6 +714,22 @@ if (typeof exports !== 'undefined') {
   };
 
 })(typeof exports !== 'undefined' ? exports : this);
+
+function unitVector(p1, p2) {
+  const dx = p2.x - p1.x;
+  const dy = p2.y - p1.y;
+  if (dx === 0.0 && dy === 0.0) {
+    return {
+      x: 0,
+      y: 0
+    };
+  }
+  const len = Math.sqrt(dx * dx + dy * dy);
+  return {
+    x: dx / len,
+    y: dy / len
+  };
+}
 
 function offsetLine(p1, p2, distance) {
   const dx = p2.x - p1.x;
